@@ -1,0 +1,28 @@
+<!--to samo co head.html - fragment gotowy do wklejenia pod atrubut th:replace-->
+
+<div class="row" xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="form-get">
+    <div class="col-md-6">
+        <label for="form-get"></label>
+
+        <form th:action="@{addpost}" method="post" id="form-get">
+        <!--<form th:method="post" id="form-get">-->
+            <label>Tytuł książki</label>
+            <input class="form-control" type="text" name="title" placeholder="Tytuł książki">
+            <label>Autor książki</label>
+            <input class="form-control" type="text" name="author" placeholder="Autor">
+            <label>Rodzaj książki</label>
+            <select class="form-control" name="kind">
+                <option>Bazy danych</option>
+                <option>Programowanie</option>
+                <option>Systemu operacyjne</option>
+                <option>Beletrystyka</option>
+                <option>Strony WWW</option>
+            </select>
+            <br/>
+            <button class="btn btn-success btn-sm" type="submit">Dodaj</button>
+            <a href="/"> <button class="btn btn-sm btn-default" type="button">Wróć do listy</button></a>
+            <br/>
+            <!--<a class="btn-primary btn" href="/books">Lista książek</a>-->
+        </form>
+    </div>
+</div>

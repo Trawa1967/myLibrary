@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head> <!--pochodzi z fragmentu head.html-->
+
+<body>
+
+
+<p style="text-align: center; font-weight: bold">Dodaj nową książkę!</p>
+<!--th:text="${}" - bindowanie zmiennej do pliku html-->
+<!--<p th:text="${name}"></p>-->
+
+<div class="container">
+
+
+    <!--poniżej wklejamy fragment formularza pochodzący z forms.html zbundowany po nazwie form-get-->
+    <div class="row" th:replace="fragments/forms :: form-get"></div>
+
+    <!--wystarczy odkomentować, aby używać formularza typu POST-->
+    <!--<div class="row" th:replace="fragments/forms :: form-post"></div>-->
+</div>
+
+</body>
+</html>
+
+
+</body>
+
+</html>
