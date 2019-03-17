@@ -1,18 +1,19 @@
 package pl.trawex.libraryMySql.services;
 
 import javassist.NotFoundException;
-import org.aspectj.weaver.ast.Not;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.trawex.libraryMySql.dtos.BookDto;
+import pl.trawex.libraryMySql.entities.Author;
 import pl.trawex.libraryMySql.entities.Book;
-import pl.trawex.libraryMySql.mapper.BookMapper;
+import pl.trawex.libraryMySql.entities.Kind;
+import pl.trawex.libraryMySql.entities.Publisher;
+import pl.trawex.libraryMySql.mappers.BookMapper;
+import pl.trawex.libraryMySql.repositories.AuthorRepository;
 import pl.trawex.libraryMySql.repositories.BookRepository;
+import pl.trawex.libraryMySql.repositories.KindRepository;
+import pl.trawex.libraryMySql.repositories.PublisherRepository;
 
-import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,12 +22,23 @@ import java.util.Optional;
 public class BookService {
 
     private BookRepository bookRepository;
+    private AuthorRepository authorRepository;
+    private KindRepository kindRepository;
+    private PublisherRepository publisherRepository;
     private BookMapper bookMapper;
 
-    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
+    public BookService(BookRepository bookRepository,
+                       AuthorRepository authorRepository,
+                       KindRepository kindRepository,
+                       PublisherRepository publisherRepository,
+                       BookMapper bookMapper) {
         this.bookRepository = bookRepository;
+        this.authorRepository= authorRepository;
+        this.kindRepository = kindRepository;
+        this.publisherRepository = publisherRepository;
         this.bookMapper = bookMapper;
     }
+
 
     //wyświetlenie listy książek
 
@@ -34,6 +46,21 @@ public class BookService {
     public List<Book>  getAll() {
         return bookRepository.findAll();
 
+    }
+
+    //---wyświetlanie wszystkich autorów
+    public List<Author> getAllAuthor() {
+        return authorRepository.findAll();
+    }
+
+    //---wyświetlanie wszystkich rodzajów
+    public List<Kind> getAllKind() {
+        return kindRepository.findAll();
+    }
+
+    //---wyświetlanie wszystkich publisheró
+    public List<Publisher> getAllPublisher() {
+        return publisherRepository.findAll();
     }
 
     public Book getBookById(int id) {
@@ -65,6 +92,21 @@ public class BookService {
         return book;
     }
 
+    public Author addAuthor(Author author) {
+        authorRepository.save(author);
+        return author;
+    }
+
+    public Kind addKind(Kind kind) {
+        kindRepository.save(kind);
+        return kind;
+    }
+
+    public Publisher addPublisher(Publisher publisher) {
+        publisherRepository.save(publisher);
+        return publisher;
+    }
+
     //wyświetlenie szczegółów
 
 //    public void getBook(int id) {
@@ -88,10 +130,12 @@ public class BookService {
 
         if(book.isPresent()) {
 
-            book.get().setTitle(bookDto.getTitle());
-            book.get().setAuthor(bookDto.getAuthor());
-            book.get().setKind(bookDto.getKind());
-            book.get().setId(bookDto.getId());
+            //book.get().setId(numer);
+            book.get().getTitle();
+            book.get().getAuthor();
+            book.get().getKind();
+            book.get().getPublisher();
+            book.get().getLanguage();
 
             bookRepository.save(book.get());
 

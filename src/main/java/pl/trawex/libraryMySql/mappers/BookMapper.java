@@ -1,22 +1,20 @@
-package pl.trawex.libraryMySql.mapper;
+package pl.trawex.libraryMySql.mappers;
 
-import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 import pl.trawex.libraryMySql.dtos.BookDto;
 import pl.trawex.libraryMySql.entities.Book;
-
-import java.util.List;
+import pl.trawex.libraryMySql.mapper.Mapper;
 
 @Component
-public class BookMapper  implements Mapper<Book, BookDto>{
-
+public class BookMapper  implements Mapper<Book, BookDto> {
+    @Override
     public BookDto map(Book from) {
-
         return new BookDto(
                 from.getId(),
                 from.getTitle(),
-                from.getAuthor(),
-                from.getKind(),
+                from.getAuthor().getIdAuthor(),
+                from.getKind().getIdKind(),
+                from.getPublisher().getIdPub(),
                 from.getLanguage()
         );
     }

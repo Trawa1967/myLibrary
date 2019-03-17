@@ -16,27 +16,8 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
-
-//    //@Override
-//
-//
-//    // List<Book> findBookById;
-//
+    //@Query(value = "select b, a, k from Book b, Author a, Kind k where (b.id=a.id_author and b.id=k.id_kind)");
     List<Book> findAll();
-//
-//    Book findBookId(int id);
-//
-//    void deleteBook(int id);
-
-//    UPDATE
-//            (
-//                    SELECT *
-//                    FROM articles
-//                    JOIN classification
-//                    ON articles.articleID = classification.articleID
-//                    WHERE classification.classID = 1
-//            )
-//    SET [updated_column] = updatevalue
 
     @Query(value = "select b from Book b where b.id=?1")
     Optional<Book> findBookById(int id);
@@ -49,9 +30,11 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Override
     Optional<Book> findById(Integer integer);
 
-//    @Override
-//    <S extends Book> List<S> findAll(Example<S> example);
 
+
+    //    @Override
+//    <S extends Book> List<S> findAll(Example<S> example);
+//-----
     @Override
     <S extends Book> List<S> saveAll(Iterable<S> iterable);
 

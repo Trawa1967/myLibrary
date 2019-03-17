@@ -14,7 +14,64 @@
 
 
     <!--poniżej wklejamy fragment formularza pochodzący z forms.html zbundowany po nazwie form-get-->
-    <div class="row" th:replace="fragments/forms :: form-get"></div>
+    <!--<div class="row" th:replace="fragments/forms :: form"></div>-->
+
+    <!-- zmiana--><div class="col-md-6">
+
+    <form th:action="@{addpost}" method="post">
+        <!--<form th:method="post" id="form-get">-->
+        <label>Tytuł książki</label>
+        <input class="form-control" type="text" name="title" placeholder="Tytuł książki">
+        <!--<label>Autor książki</label>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <label>Autor</label>
+        <div th:object="${auth}">
+            <select class="form-control" name="author">
+                <option value=""> -- </option>
+                <option th:each="auth : ${authors}"
+                        th:value="${auth.idAuthor}"
+                        th:text="${auth.name}+', '+${auth.surname}">
+                </option>
+            </select>
+            <a href="/newAuthor"> <button class="btn btn-warning btn-sm" type="button">Dodaj nowego autora</button></a>
+        </div>
+        <!--</div>-->
+        <!--<input class="form-control" type="text" name="author" placeholder="Autor ksiązki">-->
+        <label>Rodzaj książki</label>
+        <div>
+            <select class="form-control" name="kind">
+                <option value=""> -- </option>
+                <option th:each="kindses : ${kinds}"
+                        th:value="${kindses.idKind}"
+                        th:text="${kindses.nameOfKind}">
+                </option>
+            </select>
+            <a href="/newKind"> <button class="btn btn-warning btn-sm" type="button">Dodaj nowy rodzaj</button></a>
+        </div>
+        <!--<input class="form-control" name="kind">-->
+        <label>Wydawnictwo</label>
+        <div th:object="${auth}">
+            <select class="form-control" name="publisher">
+                <option value=""> -- </option>
+                <option th:each="publisherses : ${publishers}"
+                        th:value="${publisherses.idPub}"
+                        th:text="${publisherses.namePub}+', '+${publisherses.addressPub}">
+                </option>
+            </select>
+            <a href="/newPublisher"> <button class="btn btn-warning btn-sm" type="button">Dodaj nowe wydawnictwo</button></a>
+        </div>
+        <!--<input class="form-control" type="text" name="publisher" placeholder="Wydwnictwo">-->
+        <label>Język</label>
+        <input class="form-control" type="text" name="language" placeholder="Język publikacji">
+        <br/>
+        <button class="btn btn-success btn-sm" type="submit">Dodaj</button>
+        <a href="/"> <button class="btn btn-sm btn-default" type="button">Wróć do listy</button></a>
+        <br/>
+        <!--<a class="btn-primary btn" href="/books">Lista książek</a>-->
+    </form>
+</div>
+
 
     <!--wystarczy odkomentować, aby używać formularza typu POST-->
     <!--<div class="row" th:replace="fragments/forms :: form-post"></div>-->

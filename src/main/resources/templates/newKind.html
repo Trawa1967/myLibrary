@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head> <!--pochodzi z fragmentu head.html-->
+
+<body>
+
+
+<p style="text-align: center; font-weight: bold">Dodaj nowy rodzaj!</p>
+
+<div class="container">
+
+
+    <!-- zmiana--><div class="col-md-6">
+
+    <form th:action="@{addpostkind}" method="post">
+        <!--<form th:method="post" id="form-get">-->
+        <label>Nazwa rodzaju ksiązki</label>
+        <input class="form-control" type="text" name="nameOfKind" placeholder="Nazwa">
+        <button class="btn btn-success btn-sm" type="submit">Dodaj</button>
+        <a href="/newBook"> <button class="btn btn-sm btn-default" type="button">Wróć</button></a>
+        <br/>
+    </form>
+</div>
+
+</div>
+
+</body>
+</html>
+
+
+</body>
+
+</html>

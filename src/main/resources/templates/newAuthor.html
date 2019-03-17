@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head> <!--pochodzi z fragmentu head.html-->
+
+<body>
+
+
+<p style="text-align: center; font-weight: bold">Dodaj nowego Autora!</p>
+
+<div class="container">
+
+
+    <!--poniżej wklejamy fragment formularza pochodzący z forms.html zbundowany po nazwie form-get-->
+    <!--<div class="row" th:replace="fragments/forms :: form"></div>-->
+
+    <!-- zmiana--><div class="col-md-6">
+
+    <form th:action="@{addpostauthor}" method="post">
+        <!--<form th:method="post" id="form-get">-->
+        <label>Imię autora</label>
+        <input class="form-control" type="text" name="name" placeholder="Imię autora">
+        <label>Nazwisko autora</label>
+        <input class="form-control" type="text" name="surname" placeholder="Nazwisko autora">
+        <button class="btn btn-success btn-sm" type="submit">Dodaj</button>
+        <a href="/newBook"> <button class="btn btn-sm btn-default" type="button">Wróć</button></a>
+        <br/>
+        <!--<a class="btn-primary btn" href="/books">Lista książek</a>-->
+    </form>
+</div>
+
+
+    <!--wystarczy odkomentować, aby używać formularza typu POST-->
+    <!--<div class="row" th:replace="fragments/forms :: form-post"></div>-->
+</div>
+
+</body>
+</html>
+
+
+</body>
+
+</html>

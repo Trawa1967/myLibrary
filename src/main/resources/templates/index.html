@@ -1,16 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org  ">
 <head th:replace="fragments/head :: head"></head>
 <body>
 
 <div class="container">
+    <h2>Tabela książek</h2>
+    <p>Wpisz dowolny ciąg znaków odnoszący się do...</p>
+    <input class="form-control" id="myInput" type="text" placeholder="Przeszukaj">
+    <br>
 
-    <div class="row">
-        <div class="col-sm-12">
-            <h4 th:text="${welcome}"></h4>
+    <div>
+
+        <div class="col-md-12">
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tytuł książki</th>
+                    <th>Autor</th>
+                    <th>Rodzaj</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody id="myTable">
+                <tr th:each="book: ${books}">
+                    <td th:text="${book.getId()}"></td>
+                    <td th:text="${book.getTitle()}"></td>
+                    <td th:text="${book.getAuthor().getName()+', '+book.getAuthor().getSurname()}"></td>
+                    <td th:text="${book.getKind().getNameOfKind()}"></td>
+
+                    <td>
+                        <!--przekazanie obiektu w ukrytym formularzu-->
+                        <form action="/update" th:object="${book}" method="post" >
+                            <div class="form-group">
+                                <input type="hidden" th:value="${book.getId()}" name="id">
+                                <input type="hidden" th:value="${book.getTitle()}" name="title">
+                                <input type="hidden" th:value="${book.getAuthor()}" name="author">
+                                <input type="hidden" th:value="${book.getKind()}" name="kind">
+
+                                <button  class="btn btn-sm btn-success" type ="submit"
+                                         style="margin: 0.2em; width: 60px; float: left">Update
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/del" method="get">
+                            <div class="form-group">
+                                <input type="hidden" th:value="${book.getId()}" name="id">
+                                <button class="btn btn-sm btn-warning" type="submit"
+                                        style="margin: 0.2em; width: 60px; float: left">
+                                    Del
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            </form>
+            <p>.....</p>
         </div>
     </div>
-    <div class="row" th:replace="fragments/table :: table"></div>
+
+    <!--nowy fragment-->
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <!--koniec-->
 
     <div class="row">
         <div class="col-md-6">

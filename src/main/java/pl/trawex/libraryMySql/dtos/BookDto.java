@@ -1,20 +1,21 @@
 package pl.trawex.libraryMySql.dtos;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class BookDto {
 
     private int id;
     private String title;
-    private String author;
-    private String kind;
+    private Integer author;
+    private Integer kind;
+    private Integer publisher;
     private String language;
 
 }
